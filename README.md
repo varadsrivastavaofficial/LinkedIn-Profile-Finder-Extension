@@ -98,11 +98,6 @@ A `MutationObserver` watches for DOM additions and re-scans after a **300ms debo
 
 ---
 
-## Screenshots
-![Extension_Usage](screenshots/Usage.png)
-
----
-
 ## 📌 Notes
 
 - Does **not** violate LinkedIn's ToS — only opens a standard search URL
