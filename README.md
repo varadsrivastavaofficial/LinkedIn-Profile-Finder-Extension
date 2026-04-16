@@ -1,105 +1,97 @@
-# 🔵 LinkedIn Profile Finder — Chrome Extension (MV3)
+# LinkedIn Profile Finder Extension
 
-A lightweight, professional Chrome extension that automatically detects people's names on academic and profile-based webpages and injects a small LinkedIn search button next to each name.
+A lightweight Chrome extension that enables users to quickly navigate to LinkedIn profiles directly from any webpage. This tool simplifies professional networking by adding a convenient shortcut to access LinkedIn profiles without manual searching.
 
----
+## 🚀 Features
+
+* 🔍 **Quick Profile Access** – Instantly open LinkedIn profiles with a single click
+* 🌐 **Universal Integration** – Works across multiple websites and platforms
+* ⚡ **Lightweight & Fast** – Minimal performance impact on the browser
+* 🧩 **Easy to Use UI** – Clean and intuitive interface
+* 🛠️ **Developer-Friendly** – Simple structure for customization and extension
 
 ## 📁 Project Structure
 
 ```
-linkedin-profile-finder/
-├── manifest.json       # MV3 extension manifest
-├── content.js          # Core DOM scanning + injection logic
-├── styles.css          # Injected button & tooltip styles
+├── manifest.json       # Chrome extension configuration
 ├── popup.html          # Extension popup UI
-├── test-page.html      # Local test page (IIT Bombay faculty mock)
-└── icons/
-    ├── icon16.png
-    ├── icon48.png
-    └── icon128.png
+├── popup.js            # Handles user interaction
+├── content.js          # Injects functionality into web pages
+├── background.js       # Background processes (if applicable)
+├── icons/              # Extension icons
 ```
 
----
+## ⚙️ Installation Guide
 
-## 🚀 Installation (Developer Mode)
+1. Clone or download this repository:
 
-1. Open Chrome and navigate to `chrome://extensions/`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **"Load unpacked"**
-4. Select the `linkedin-profile-finder/` folder
-5. The extension is now active on all pages ✅
+   ```
+   git clone https://github.com/varadsrivastavaofficial/LinkedIn-Profile-Finder-Extension.git
+   ```
 
----
+2. Open Google Chrome and go to:
 
-## 🧪 Testing Locally
+   ```
+   chrome://extensions/
+   ```
 
-Open `test-page.html` in Chrome **after** installing the extension:
+3. Enable **Developer Mode** (top right corner)
 
-1. You should see LinkedIn **🔵 buttons** next to each faculty name
-2. Click **"Load Visiting Faculty"** to test MutationObserver (dynamic content)
-3. Hover any button to see the **"View LinkedIn Profile"** tooltip
-4. Click a button → LinkedIn search opens in a new tab with name + institution
+4. Click on **Load Unpacked**
 
----
+5. Select the downloaded project folder
 
-## ⚙️ How It Works
+6. The extension will now appear in your Chrome toolbar
 
-### Name Detection
-- Queries CSS selectors like `.faculty-name`, `.profile-name`, `.staff-name`, `[itemprop="name"]`, and headings inside profile containers
-- Validates text against a regex for plausible human names (2–5 capitalised words, optional prefix)
-- Filters out stop-words (department names, navigation labels, etc.)
+## 🧑‍💻 How to Use
 
-### Institution Detection
-Automatically extracts institution from:
-1. `<title>` tag
-2. `<meta name="description">` content
-3. `<meta property="og:site_name">` content
-4. Page hostname as fallback
+1. Navigate to any webpage containing a person’s name or relevant profile context
+2. Click on the extension icon in the toolbar
+3. A LinkedIn button or option will appear
+4. Click it to directly open the corresponding LinkedIn profile
 
-### LinkedIn Search URL
-```
-https://www.linkedin.com/search/results/people/?keywords=NAME+INSTITUTION
-```
+## 🛠️ Tech Stack
 
-### Duplicate Prevention
-Each processed element is marked with `data-lpf-processed="true"` to prevent re-injection on re-renders.
+* JavaScript
+* HTML
+* Chrome Extensions API
 
-### Dynamic Content
-A `MutationObserver` watches for DOM additions and re-scans after a **300ms debounce**, making it compatible with React, Vue, Angular, and other SPA frameworks.
+## 📌 Use Cases
 
----
+* Networking and outreach
+* Recruitment and talent search
+* Quick professional verification
+* Sales and lead generation
 
 ## 🔒 Permissions
 
-| Permission | Reason |
-|---|---|
-| `activeTab` | Access current tab context |
-| `scripting` | Inject content scripts programmatically |
-| `host_permissions: <all_urls>` | Run on all academic/profile pages |
+This extension may require permissions such as:
+
+* Access to active tabs
+* Script injection into webpages
+
+These are necessary to identify and interact with profile-related data.
+
+## 📄 Future Improvements
+
+* Auto-detection of names on webpages
+* AI-based profile matching
+* Integration with CRM tools
+* Enhanced UI/UX
+
+## 🤝 Contributing
+
+Contributions are welcome. Feel free to fork the repository and submit pull requests.
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
 
 ---
 
-## 🎨 UI Design
+## 👤 Author
 
-- **Size:** 24×24px button, icon-only — minimal footprint
-- **Color:** LinkedIn Blue `#0A66C2`
-- **Hover:** `scale(1.15)` + `brightness(1.12)` + stronger shadow
-- **Tooltip:** "View LinkedIn Profile" — appears above button on hover
-- **Rounded edges:** `border-radius: 6px`
+**Varad Srivastava**
+BS Economics, IISER Bhopal
 
 ---
-
-## 🌐 Tested Pages
-
-- IIT / NIT faculty directories
-- University "People" pages
-- Any page with `.faculty-name`, `.profile-name`, `.staff-name` classes
-- Pages with profile cards containing headings inside `.card`, `.team`, `.member` containers
-
----
-
-## 📌 Notes
-
-- Does **not** violate LinkedIn's ToS — only opens a standard search URL
-- No data is collected or transmitted; all logic runs locally in the browser
-- Extension is entirely client-side, no backend required
